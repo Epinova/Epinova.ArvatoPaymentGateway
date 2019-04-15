@@ -49,7 +49,7 @@ deploy:
   skip_symbols: false
   artifact: /.*\.nupkg/
   on:
-    branch: masterz
+    branch: master
     APPVEYOR_REPO_BRANCH: master
 
 # here we are going to override common configuration
