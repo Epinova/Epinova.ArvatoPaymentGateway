@@ -18,14 +18,10 @@ namespace Epinova.ArvatoPaymentGateway
 {
     internal class InvoiceGatewayService : RestServiceBase, IInvoiceGatewayService, ICustomerLookupService
     {
-        internal static HttpClient Client;
+        internal static HttpClient Client = new HttpClient { BaseAddress = new Uri(ConfigurationManager.AppSettings["AfterPay.Api.BaseAddress"] ?? "https://api.afterpay.io/") };
         private readonly ILogger _log;
         private readonly IMapper _mapper;
 
-        static InvoiceGatewayService()
-        {
-            Client = new HttpClient { BaseAddress = new Uri(ConfigurationManager.AppSettings["AfterPay.Api.BaseAddress"] ?? "https://api.afterpay.io/") };
-        }
 
         public InvoiceGatewayService(ILogger log, IMapper mapper) : base(log)
         {
