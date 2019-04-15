@@ -26,8 +26,6 @@ pull_requests:
 build:
   publish_nuget: true
   verbosity: minimal
-artifacts:
-  - path: '**\xunit*.xml'
 
 test_script:
 - cmd: '%xunit20%\xunit.console tests\bin\Release\Epinova.ArvatoPaymentGatewayTests.dll -notrait "category=Integration" -notrait "category=Manual" -appveyor -xml xunit.test.results.xml'
