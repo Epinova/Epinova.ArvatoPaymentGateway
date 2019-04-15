@@ -13,10 +13,7 @@
         public string ProductUrl { get; set; }
         public decimal Quantity { get; set; }
         public string UnitCode { get; set; }
-
         public decimal VatAmount { get; set; }
-
-        //public VatCategoryDto VatCategory { get; set; }
         public decimal VatPercent { get; set; }
     }
 }
