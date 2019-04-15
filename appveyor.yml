@@ -7,7 +7,7 @@ environment:
   sonarcloudorg: epinova
   sonarcloudproj: Epinova_Epinova.ArvatoPaymentGateway
   sonarcloudkey:
-    secure: xxxxxxxxxxxxxxxxxxxxxx
+    secure: wq91sRllbfi7QV1KHudkDoKm9jigaNphfCTScfdb9gxMaLAiEh/62E+CBKozDFln
 init:
 - cmd: nuget sources add -Name Episerver -Source http://nuget.episerver.com/feed/packages.svc/
 assembly_info:
