@@ -198,6 +198,7 @@
     <Compile Include="VersionInfoDto.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Epinova.ArvatoPaymentGateway.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
