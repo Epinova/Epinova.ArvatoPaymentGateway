@@ -14,7 +14,7 @@
     <copyright>Copyright 2019 - Epinova AS</copyright>
     <tags></tags>
     <dependencies>
-      <dependency id="Automapper" version="8.0" />
+      <dependency id="Automapper" version="8.1" />
       <dependency id="StructureMap" version="4.7" />
       <dependency id="EPiServer.Framework" version="[11.1, 12)" />
     </dependencies>
