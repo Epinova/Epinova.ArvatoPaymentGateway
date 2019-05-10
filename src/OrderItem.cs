@@ -9,10 +9,7 @@
         public decimal NetUnitPrice { get; set; }
         public string ProductId { get; set; }
         public decimal Quantity { get; set; }
-
         public decimal VatAmount { get; set; }
-
-        //public string VatCategory { get; set; }
         public double VatPercent { get; set; }
     }
 }
