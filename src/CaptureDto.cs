@@ -6,7 +6,6 @@ namespace Epinova.ArvatoPaymentGateway
     internal class CaptureDto : BaseOrderDto
     {
         public string AccountProfileNumber { get; set; }
-        public Guid CaptureId { get; set; }
         public CaptureItemDto[] CaptureItems { get; set; }
         public DateTime ContractDate { get; set; }
         public string DirectDebitBankAccount { get; set; }
