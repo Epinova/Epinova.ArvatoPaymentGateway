@@ -5,7 +5,6 @@ namespace Epinova.ArvatoPaymentGateway.Base
     internal abstract class BaseOrderDto
     {
         public decimal Amount { get; set; }
-        public decimal Balance { get; set; }
         public string CaptureNumber { get; set; }
         public CurrencyDto Currency { get; set; }
         public string CustomerNumber { get; set; }
