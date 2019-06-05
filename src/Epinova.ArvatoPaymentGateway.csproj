@@ -148,7 +148,8 @@
     <Compile Include="CustomerRiskDto.cs" />
     <Compile Include="ErrorAction.cs" />
     <Compile Include="ErrorCode.cs" />
-    <Compile Include="HashCodeExtensions.cs" />
+    <Compile Include="IdempotentExtensions.cs" />
+    <Compile Include="IIdempotent.cs" />
     <Compile Include="ICustomerLookupService.cs" />
     <Compile Include="IInvoiceGatewayService.cs" />
     <Compile Include="Installment.cs" />

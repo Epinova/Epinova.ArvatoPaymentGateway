@@ -6,7 +6,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
     public class AuthorizeCustomerTests
     {
         [Fact]
-        public void GetHashCode_TwoSimilarInstances_ReturnsSameHashCode()
+        public void GetIdempotentKey_TwoSimilarInstances_ReturnsSameHashCode()
         {
             var customer1 = new AuthorizeCustomer
             {
@@ -33,11 +33,11 @@ namespace Epinova.ArvatoPaymentGatewayTests
                 PostalCode = "postal code",
                 PostalPlace = "postal place"
             };
-            Assert.Equal(customer1.GetHashCode(), customer2.GetHashCode());
+            Assert.Equal(customer1.GetIdempotentKey(), customer2.GetIdempotentKey());
         }
 
         [Fact]
-        public void GetHashCode_TwoUnlikeInstances_ReturnsDifferentHashCode()
+        public void GetIdempotentKey_TwoUnlikeInstances_ReturnsDifferentHashCode()
         {
             var customer1 = new AuthorizeCustomer
             {
@@ -64,7 +64,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
                 PostalCode = "postal code 2",
                 PostalPlace = "postal place 2"
             };
-            Assert.NotEqual(customer1.GetHashCode(), customer2.GetHashCode());
+            Assert.NotEqual(customer1.GetIdempotentKey(), customer2.GetIdempotentKey());
         }
     }
 }

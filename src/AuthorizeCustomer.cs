@@ -1,6 +1,6 @@
 namespace Epinova.ArvatoPaymentGateway
 {
-    public class AuthorizeCustomer
+    public class AuthorizeCustomer : IIdempotent
     {
         public string Address { get; set; }
         public string City { get; set; }
@@ -12,12 +12,7 @@ namespace Epinova.ArvatoPaymentGateway
         public string PostalCode { get; set; }
         public string PostalPlace { get; set; }
 
-        public override int GetHashCode()
-        {
-            return CalculateHash();
-        }
-
-        private int CalculateHash()
+        public int GetIdempotentKey()
         {
             unchecked
             {
