@@ -14,7 +14,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
         }
 
         [Fact]
-        public void GetHashCode_TwoSimilarInstances_ReturnsSameHashCode()
+        public void GetIdempotentKey_TwoSimilarInstances_ReturnsSameHashCode()
         {
             var summary1 = new OrderSummary
             {
@@ -61,11 +61,11 @@ namespace Epinova.ArvatoPaymentGatewayTests
                     }
                 }
             };
-            Assert.Equal(summary1.GetHashCode(), summary2.GetHashCode());
+            Assert.Equal(summary1.GetIdempotentKey(), summary2.GetIdempotentKey());
         }
 
         [Fact]
-        public void GetHashCode_TwoUnlikeInstances_ReturnsDifferentHashCode()
+        public void GetIdempotentKey_TwoUnlikeInstances_ReturnsDifferentHashCode()
         {
             var summary1 = new OrderSummary
             {
@@ -112,7 +112,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
                     }
                 }
             };
-            Assert.NotEqual(summary1.GetHashCode(), summary2.GetHashCode());
+            Assert.NotEqual(summary1.GetIdempotentKey(), summary2.GetIdempotentKey());
         }
     }
 }

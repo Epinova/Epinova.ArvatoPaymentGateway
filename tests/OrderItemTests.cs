@@ -6,7 +6,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
     public class OrderItemTests
     {
         [Fact]
-        public void GetHashCode_TwoSimilarInstances_ReturnsSameHashCode()
+        public void GetIdempotentKey_TwoSimilarInstances_ReturnsSameHashCode()
         {
             var item1 =
                 new OrderItem
@@ -34,11 +34,11 @@ namespace Epinova.ArvatoPaymentGatewayTests
                 VatAmount = 6,
                 VatPercent = 7
             };
-            Assert.Equal(item1.GetHashCode(), item2.GetHashCode());
+            Assert.Equal(item1.GetIdempotentKey(), item2.GetIdempotentKey());
         }
 
         [Fact]
-        public void GetHashCode_TwoUnlikeInstances_ReturnsDifferentHashCode()
+        public void GetIdempotentKey_TwoUnlikeInstances_ReturnsDifferentHashCode()
         {
             var item1 =
                 new OrderItem
@@ -66,7 +66,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
                 VatAmount = 66,
                 VatPercent = 77
             };
-            Assert.NotEqual(item1.GetHashCode(), item2.GetHashCode());
+            Assert.NotEqual(item1.GetIdempotentKey(), item2.GetIdempotentKey());
         }
     }
 }

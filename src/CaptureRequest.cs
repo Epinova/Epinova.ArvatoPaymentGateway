@@ -11,7 +11,7 @@
             unchecked
             {
                 int hashCode = InvoiceNumber?.GetHashCode() ?? 0;
-                hashCode = (hashCode * 397) ^ (OrderDetails?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (OrderDetails?.GetIdempotentKey() ?? 0);
                 hashCode = (hashCode * 397) ^ (OrderNumber?.GetHashCode() ?? 0);
                 return hashCode;
             }

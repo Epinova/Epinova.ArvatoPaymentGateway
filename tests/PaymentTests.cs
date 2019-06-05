@@ -6,7 +6,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
     public class PaymentTests
     {
         [Fact]
-        public void GetHashCode_TwoSimilarInstances_ReturnsSameHashCode()
+        public void GetIdempotentKey_TwoSimilarInstances_ReturnsSameHashCode()
         {
             var payment1 = new Payment
             {
@@ -21,11 +21,11 @@ namespace Epinova.ArvatoPaymentGatewayTests
                 Installment = new Installment { ProfileNo = 2 },
                 Type = PaymentType.Invoice
             };
-            Assert.Equal(payment1.GetHashCode(), payment2.GetHashCode());
+            Assert.Equal(payment1.GetIdempotentKey(), payment2.GetIdempotentKey());
         }
 
         [Fact]
-        public void GetHashCode_TwoUnlikeInstances_ReturnsDifferentHashCode()
+        public void GetIdempotentKey_TwoUnlikeInstances_ReturnsDifferentHashCode()
         {
             var payment1 = new Payment
             {
@@ -40,7 +40,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
                 Installment = new Installment { ProfileNo = 4 },
                 Type = PaymentType.Invoice
             };
-            Assert.NotEqual(payment1.GetHashCode(), payment2.GetHashCode());
+            Assert.NotEqual(payment1.GetIdempotentKey(), payment2.GetIdempotentKey());
         }
     }
 }

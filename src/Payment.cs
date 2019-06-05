@@ -10,8 +10,8 @@
         {
             unchecked
             {
-                int hashCode = Account?.GetHashCode() ?? 0;
-                hashCode = (hashCode * 397) ^ (Installment?.GetHashCode() ?? 0);
+                int hashCode = Account?.GetIdempotentKey() ?? 0;
+                hashCode = (hashCode * 397) ^ (Installment?.GetIdempotentKey() ?? 0);
                 hashCode = (hashCode * 397) ^ (int) Type;
                 return hashCode;
             }

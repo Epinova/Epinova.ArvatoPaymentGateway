@@ -10,9 +10,9 @@
         {
             unchecked
             {
-                int hashCode = Customer?.GetHashCode() ?? 0;
-                hashCode = (hashCode * 397) ^ (Order?.GetHashCode() ?? 0);
-                hashCode = (hashCode * 397) ^ (Payment?.GetHashCode() ?? 0);
+                int hashCode = Customer?.GetIdempotentKey() ?? 0;
+                hashCode = (hashCode * 397) ^ (Order?.GetIdempotentKey() ?? 0);
+                hashCode = (hashCode * 397) ^ (Payment?.GetIdempotentKey() ?? 0);
                 return hashCode;
             }
         }
