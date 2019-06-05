@@ -11,5 +11,27 @@ namespace Epinova.ArvatoPaymentGateway
         public string Phone { get; set; }
         public string PostalCode { get; set; }
         public string PostalPlace { get; set; }
+
+        public override int GetHashCode()
+        {
+            return CalculateHash();
+        }
+
+        private int CalculateHash()
+        {
+            unchecked
+            {
+                int hashCode = Address?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ (City?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Email?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (FirstName?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Identifier?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (LastName?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (Phone?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (PostalCode?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ (PostalPlace?.GetHashCode() ?? 0);
+                return hashCode;
+            }
+        }
     }
 }

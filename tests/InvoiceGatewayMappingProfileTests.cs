@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Epinova.ArvatoPaymentGateway;
@@ -26,7 +25,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
         }
 
         [Fact]
-        public void AutomapperConfiguration_IsValid()
+        public void AutoMapperConfiguration_IsValid()
         {
             _config.AssertConfigurationIsValid();
         }
@@ -106,10 +105,10 @@ namespace Epinova.ArvatoPaymentGatewayTests
         {
             var src = new CreditRequest
             {
-                OrderItems = new List<CreditOrderItem>
+                OrderItems = new[]
                 {
-                    new CreditOrderItem { Description = Factory.GetString() },
-                    new CreditOrderItem { Description = Factory.GetString() }
+                    new OrderItem { Description = Factory.GetString() },
+                    new OrderItem { Description = Factory.GetString() }
                 }
             };
 
@@ -126,10 +125,10 @@ namespace Epinova.ArvatoPaymentGatewayTests
         {
             var src = new CreditRequest
             {
-                OrderItems = new List<CreditOrderItem>
+                OrderItems = new[]
                 {
-                    new CreditOrderItem { GrossUnitPrice = Factory.GetInteger() },
-                    new CreditOrderItem { GrossUnitPrice = Factory.GetInteger() }
+                    new OrderItem { GrossUnitPrice = Factory.GetInteger() },
+                    new OrderItem { GrossUnitPrice = Factory.GetInteger() }
                 }
             };
 

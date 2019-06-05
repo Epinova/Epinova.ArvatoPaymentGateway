@@ -3,25 +3,26 @@ using Xunit;
 
 namespace Epinova.ArvatoPaymentGatewayTests
 {
-    public class CreditRequestTests
+    public class OrderSummaryTests
     {
         [Fact]
-        public void Ctor_OrderItems_IsNotNull()
+        public void Ctor_Items_IsNotNull()
         {
-            var request = new CreditRequest();
+            var request = new OrderSummary();
 
-            Assert.NotNull(request.OrderItems);
+            Assert.NotNull(request.Items);
         }
 
         [Fact]
         public void GetHashCode_TwoSimilarInstances_ReturnsSameHashCode()
         {
-            var request1 = new CreditRequest
+            var summary1 = new OrderSummary
             {
-                CaptureNumber = "1",
-                CreditNoteNumber = "2",
-                OrderNumber = "3",
-                OrderItems = new[]
+                Currency = "NOK",
+                DiscountAmount = 1,
+                TotalGrossAmount = 2,
+                TotalNetAmount = 3,
+                Items = new[]
                 {
                     new OrderItem
                     {
@@ -38,12 +39,13 @@ namespace Epinova.ArvatoPaymentGatewayTests
                 }
             };
 
-            var request2 = new CreditRequest
+            var summary2 = new OrderSummary
             {
-                CaptureNumber = "1",
-                CreditNoteNumber = "2",
-                OrderNumber = "3",
-                OrderItems = new[]
+                Currency = "NOK",
+                DiscountAmount = 1,
+                TotalGrossAmount = 2,
+                TotalNetAmount = 3,
+                Items = new[]
                 {
                     new OrderItem
                     {
@@ -59,18 +61,19 @@ namespace Epinova.ArvatoPaymentGatewayTests
                     }
                 }
             };
-            Assert.Equal(request1.GetHashCode(), request2.GetHashCode());
+            Assert.Equal(summary1.GetHashCode(), summary2.GetHashCode());
         }
 
         [Fact]
         public void GetHashCode_TwoUnlikeInstances_ReturnsDifferentHashCode()
         {
-            var request1 = new CreditRequest
+            var summary1 = new OrderSummary
             {
-                CaptureNumber = "1",
-                CreditNoteNumber = "2",
-                OrderNumber = "3",
-                OrderItems = new[]
+                Currency = "NOK",
+                DiscountAmount = 1,
+                TotalGrossAmount = 2,
+                TotalNetAmount = 3,
+                Items = new[]
                 {
                     new OrderItem
                     {
@@ -87,12 +90,13 @@ namespace Epinova.ArvatoPaymentGatewayTests
                 }
             };
 
-            var request2 = new CreditRequest
+            var summary2 = new OrderSummary
             {
-                CaptureNumber = "11",
-                CreditNoteNumber = "2",
-                OrderNumber = "3",
-                OrderItems = new[]
+                Currency = "NOK",
+                DiscountAmount = 11,
+                TotalGrossAmount = 22,
+                TotalNetAmount = 33,
+                Items = new[]
                 {
                     new OrderItem
                     {
@@ -108,7 +112,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
                     }
                 }
             };
-            Assert.NotEqual(request1.GetHashCode(), request2.GetHashCode());
+            Assert.NotEqual(summary1.GetHashCode(), summary2.GetHashCode());
         }
     }
 }

@@ -136,7 +136,6 @@
     <Compile Include="CheckoutCustomerDto.cs" />
     <Compile Include="ConversationLanguageDto.cs" />
     <Compile Include="CountryCodeDto.cs" />
-    <Compile Include="CreditOrderItem.cs" />
     <Compile Include="CreditRequest.cs" />
     <Compile Include="CreditResponse.cs" />
     <Compile Include="CurrencyDto.cs" />
@@ -149,6 +148,7 @@
     <Compile Include="CustomerRiskDto.cs" />
     <Compile Include="ErrorAction.cs" />
     <Compile Include="ErrorCode.cs" />
+    <Compile Include="HashCodeExtensions.cs" />
     <Compile Include="ICustomerLookupService.cs" />
     <Compile Include="IInvoiceGatewayService.cs" />
     <Compile Include="Installment.cs" />
