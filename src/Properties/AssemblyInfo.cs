@@ -12,9 +12,9 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: InternalsVisibleTo("Epinova.ArvatoPaymentGatewayTests")]
 [assembly: Guid("ecf74b4f-444a-4b4f-993b-b3a389dfcd1a")]
-[assembly: AssemblyVersion("11.0.0.0")]
-[assembly: AssemblyFileVersion("11.0.0.0")]
-[assembly: AssemblyInformationalVersion("11.0.0.0")]
+[assembly: AssemblyVersion("11.1.0.0")]
+[assembly: AssemblyFileVersion("11.1.0.0")]
+[assembly: AssemblyInformationalVersion("11.1.0.0")]
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
 #else
