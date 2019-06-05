@@ -75,7 +75,7 @@ namespace Epinova.ArvatoPaymentGateway
 
         public async Task<AuthorizeResponse> AuthorizeAsync(string authorizationKey, AuthorizeRequest request)
         {
-            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, "api/v3/checkout/authorize", HttpMethod.Post);
+            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, "api/v3/checkout/authorize", HttpMethod.Post, request.GetHashCode());
             var requestDto = _mapper.Map<AuthorizeRequestDto>(request);
 
             string content = await SerializeDto(requestDto);
@@ -170,7 +170,7 @@ namespace Epinova.ArvatoPaymentGateway
 
         public async Task<CancelResponse> CancelAsync(string authorizationKey, string orderNumber)
         {
-            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, $"api/v3/orders/{orderNumber}/voids", HttpMethod.Post);
+            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, $"api/v3/orders/{orderNumber}/voids", HttpMethod.Post, orderNumber);
 
             //INFO: No POST data needed for voids. --tarjei
 
@@ -206,7 +206,7 @@ namespace Epinova.ArvatoPaymentGateway
 
         public async Task<CaptureResponse> CaptureAsync(string authorizationKey, CaptureRequest request)
         {
-            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, $"api/v3/orders/{request.OrderNumber}/captures", HttpMethod.Post);
+            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, $"api/v3/orders/{request.OrderNumber}/captures", HttpMethod.Post, request.GetHashCode());
             var requestDto = _mapper.Map<CaptureRequestDto>(request);
 
             string content = await SerializeDto(requestDto);
@@ -245,7 +245,7 @@ namespace Epinova.ArvatoPaymentGateway
 
         public async Task<CaptureResponse> CaptureFullAsync(string authorizationKey, string orderNumber)
         {
-            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, $"api/v3/orders/{orderNumber}/captures", HttpMethod.Post);
+            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, $"api/v3/orders/{orderNumber}/captures", HttpMethod.Post, orderNumber);
 
             //INFO: No POST data needed for full captures. --tarjei
 
@@ -281,7 +281,7 @@ namespace Epinova.ArvatoPaymentGateway
 
         public async Task<CreditResponse> CreditAsync(string authorizationKey, CreditRequest request)
         {
-            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, $"api/v3/orders/{request.OrderNumber}/refunds", HttpMethod.Post);
+            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, $"api/v3/orders/{request.OrderNumber}/refunds", HttpMethod.Post, request.GetHashCode());
 
             var requestDto = _mapper.Map<RefundOrderRequestDto>(request);
 
@@ -321,7 +321,7 @@ namespace Epinova.ArvatoPaymentGateway
 
         public async Task<CreditResponse> CreditFullAsync(string authorizationKey, string orderNumber)
         {
-            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, $"api/v3/orders/{orderNumber}/refunds", HttpMethod.Post);
+            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, $"api/v3/orders/{orderNumber}/refunds", HttpMethod.Post, orderNumber);
 
             //INFO: No POST data needed for full refunds. --tarjei
 
@@ -391,7 +391,7 @@ namespace Epinova.ArvatoPaymentGateway
 
         public async Task<Version> GetVersionAsync(string authorizationKey)
         {
-            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, "api/v3/version");
+            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, "api/v3/version", HttpMethod.Get);
             HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage));
             if (responseMessage == null)
             {
@@ -429,7 +429,7 @@ namespace Epinova.ArvatoPaymentGateway
 
         public async Task<bool> IsApiUpAsync(string authorizationKey)
         {
-            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, "api/v3/status");
+            HttpRequestMessage requestMessage = BuildRequest(authorizationKey, "api/v3/status", HttpMethod.Get);
             HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage));
 
             if (responseMessage == null)
@@ -457,16 +457,13 @@ namespace Epinova.ArvatoPaymentGateway
             return request;
         }
 
-        private static HttpRequestMessage BuildRequest(string authorizationKey, string address, HttpMethod method)
+        private static HttpRequestMessage BuildRequest(string authorizationKey, string address, HttpMethod method, object idempotencyKey = null)
         {
             var request = new HttpRequestMessage { RequestUri = new Uri(Client.BaseAddress, address), Method = method };
             request.Headers.Add("X-Auth-Key", authorizationKey);
+            if (idempotencyKey != null)
+                request.Headers.Add("X-Idempotency-Key", idempotencyKey.ToString());
             return request;
-        }
-
-        private static HttpRequestMessage BuildRequest(string authorizationKey, string address)
-        {
-            return BuildRequest(authorizationKey, address, HttpMethod.Get);
         }
 
         private static async Task<string> SerializeDto(object entity)

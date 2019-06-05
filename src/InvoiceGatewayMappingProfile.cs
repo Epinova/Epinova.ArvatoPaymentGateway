@@ -97,7 +97,7 @@ namespace Epinova.ArvatoPaymentGateway
                 .ForMember(dest => dest.ProductUrl, opt => opt.Ignore())
                 .ForMember(dest => dest.MarketPlaceSellerId, opt => opt.Ignore());
 
-            CreateMap<CreditOrderItem, RefundOrderItemDto>()
+            CreateMap<OrderItem, RefundOrderItemDto>()
                 .IncludeBase<OrderItem, OrderItemDto>()
                 .ForMember(dest => dest.RefundType, opt => opt.MapFrom(src => RefundTypeDto.Return));
 

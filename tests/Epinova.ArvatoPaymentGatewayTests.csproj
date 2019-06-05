@@ -129,7 +129,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountProductTests.cs" />
+    <Compile Include="AuthorizeCustomerTests.cs" />
+    <Compile Include="AuthorizeRequestTests.cs" />
+    <Compile Include="CaptureRequestTests.cs" />
+    <Compile Include="HashCodeExtensionsTests.cs" />
+    <Compile Include="InstallmentTests.cs" />
     <Compile Include="LoggerMockExtensions.cs" />
+    <Compile Include="OrderItemTests.cs" />
+    <Compile Include="OrderSummaryTests.cs" />
+    <Compile Include="PaymentTests.cs" />
     <Compile Include="ResponseDtoBaseTests.cs" />
     <Compile Include="CreditRequestTests.cs" />
     <Compile Include="Factory.cs" />

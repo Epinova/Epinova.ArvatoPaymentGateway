@@ -11,5 +11,28 @@
         public decimal Quantity { get; set; }
         public decimal VatAmount { get; set; }
         public double VatPercent { get; set; }
+
+
+        public override int GetHashCode()
+        {
+            return CalculateHash();
+        }
+
+        private int CalculateHash()
+        {
+            unchecked
+            {
+                int hashCode = Description?.GetHashCode() ?? 0;
+                hashCode = (hashCode * 397) ^ DiscountAmount.GetHashCode();
+                hashCode = (hashCode * 397) ^ GrossUnitPrice.GetHashCode();
+                hashCode = (hashCode * 397) ^ LineNumber;
+                hashCode = (hashCode * 397) ^ NetUnitPrice.GetHashCode();
+                hashCode = (hashCode * 397) ^ (ProductId?.GetHashCode() ?? 0);
+                hashCode = (hashCode * 397) ^ Quantity.GetHashCode();
+                hashCode = (hashCode * 397) ^ VatAmount.GetHashCode();
+                hashCode = (hashCode * 397) ^ VatPercent.GetHashCode();
+                return hashCode;
+            }
+        }
     }
 }
