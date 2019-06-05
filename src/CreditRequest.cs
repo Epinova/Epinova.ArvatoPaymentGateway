@@ -1,6 +1,6 @@
 ﻿namespace Epinova.ArvatoPaymentGateway
 {
-    public class CreditRequest
+    public class CreditRequest : IIdempotent
     {
         public CreditRequest()
         {
@@ -12,18 +12,13 @@
         public OrderItem[] OrderItems { get; set; }
         public string OrderNumber { get; set; }
 
-        public override int GetHashCode()
-        {
-            return CalculateHash();
-        }
-
-        private int CalculateHash()
+        public int GetIdempotentKey()
         {
             unchecked
             {
                 int hashCode = CaptureNumber?.GetHashCode() ?? 0;
                 hashCode = (hashCode * 397) ^ (CreditNoteNumber?.GetHashCode() ?? 0);
-                hashCode = (hashCode * 397) ^ OrderItems.GetListHashCode();
+                hashCode = (hashCode * 397) ^ OrderItems.GetIdempotentListKey();
                 hashCode = (hashCode * 397) ^ (OrderNumber?.GetHashCode() ?? 0);
                 return hashCode;
             }

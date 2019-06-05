@@ -1,6 +1,6 @@
 ﻿namespace Epinova.ArvatoPaymentGateway
 {
-    public class OrderSummary
+    public class OrderSummary : IIdempotent
     {
         public OrderSummary()
         {
@@ -13,18 +13,13 @@
         public decimal TotalGrossAmount { get; set; }
         public decimal TotalNetAmount { get; set; }
 
-        public override int GetHashCode()
-        {
-            return CalculateHash();
-        }
-
-        private int CalculateHash()
+        public int GetIdempotentKey()
         {
             unchecked
             {
                 int hashCode = Currency?.GetHashCode() ?? 0;
                 hashCode = (hashCode * 397) ^ DiscountAmount.GetHashCode();
-                hashCode = (hashCode * 397) ^ Items.GetListHashCode();
+                hashCode = (hashCode * 397) ^ Items.GetIdempotentListKey();
                 hashCode = (hashCode * 397) ^ TotalGrossAmount.GetHashCode();
                 hashCode = (hashCode * 397) ^ TotalNetAmount.GetHashCode();
                 return hashCode;

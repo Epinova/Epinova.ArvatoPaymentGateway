@@ -1,15 +1,10 @@
 ﻿namespace Epinova.ArvatoPaymentGateway
 {
-    public class AccountProduct
+    public class AccountProduct : IIdempotent
     {
         public int ProfileNo { get; set; }
 
-        public override int GetHashCode()
-        {
-            return CalculateHash();
-        }
-
-        private int CalculateHash()
+        public int GetIdempotentKey()
         {
             return ProfileNo;
         }

@@ -1,6 +1,6 @@
 ﻿namespace Epinova.ArvatoPaymentGateway
 {
-    public class OrderItem
+    public class OrderItem : IIdempotent
     {
         public string Description { get; set; }
         public decimal DiscountAmount { get; set; }
@@ -12,13 +12,7 @@
         public decimal VatAmount { get; set; }
         public double VatPercent { get; set; }
 
-
-        public override int GetHashCode()
-        {
-            return CalculateHash();
-        }
-
-        private int CalculateHash()
+        public int GetIdempotentKey()
         {
             unchecked
             {

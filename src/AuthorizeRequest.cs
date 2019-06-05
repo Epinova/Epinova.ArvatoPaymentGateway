@@ -1,17 +1,12 @@
 ﻿namespace Epinova.ArvatoPaymentGateway
 {
-    public class AuthorizeRequest
+    public class AuthorizeRequest : IIdempotent
     {
         public AuthorizeCustomer Customer { get; set; }
         public OrderInfo Order { get; set; }
         public Payment Payment { get; set; }
 
-        public override int GetHashCode()
-        {
-            return CalculateHash();
-        }
-
-        private int CalculateHash()
+        public int GetIdempotentKey()
         {
             unchecked
             {

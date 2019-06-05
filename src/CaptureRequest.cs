@@ -1,17 +1,12 @@
 ﻿namespace Epinova.ArvatoPaymentGateway
 {
-    public class CaptureRequest
+    public class CaptureRequest : IIdempotent
     {
         public string InvoiceNumber { get; set; }
         public OrderSummary OrderDetails { get; set; }
         public string OrderNumber { get; set; }
 
-        public override int GetHashCode()
-        {
-            return CalculateHash();
-        }
-
-        private int CalculateHash()
+        public int GetIdempotentKey()
         {
             unchecked
             {

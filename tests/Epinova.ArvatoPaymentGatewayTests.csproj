@@ -133,7 +133,7 @@
     <Compile Include="AuthorizeCustomerTests.cs" />
     <Compile Include="AuthorizeRequestTests.cs" />
     <Compile Include="CaptureRequestTests.cs" />
-    <Compile Include="HashCodeExtensionsTests.cs" />
+    <Compile Include="IdempotentExtensionsTests.cs" />
     <Compile Include="InstallmentTests.cs" />
     <Compile Include="LoggerMockExtensions.cs" />
     <Compile Include="OrderItemTests.cs" />

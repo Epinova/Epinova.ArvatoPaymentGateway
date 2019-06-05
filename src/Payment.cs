@@ -1,17 +1,12 @@
 ﻿namespace Epinova.ArvatoPaymentGateway
 {
-    public class Payment
+    public class Payment : IIdempotent
     {
         public AccountProduct Account { get; set; }
         public Installment Installment { get; set; }
         public PaymentType Type { get; set; }
 
-        public override int GetHashCode()
-        {
-            return CalculateHash();
-        }
-
-        private int CalculateHash()
+        public int GetIdempotentKey()
         {
             unchecked
             {
