@@ -1,6 +1,9 @@
+using System;
+using Epinova.Infrastructure.Logging;
+
 namespace Epinova.ArvatoPaymentGateway
 {
-    public class AuthorizeCustomer : IIdempotent
+    public class AuthorizeCustomer : IIdempotent, ICustomLogMessage
     {
         public string Address { get; set; }
         public string City { get; set; }
@@ -27,6 +30,20 @@ namespace Epinova.ArvatoPaymentGateway
                 hashCode = (hashCode * 397) ^ (PostalPlace?.GetHashCode() ?? 0);
                 return hashCode;
             }
+        }
+
+        public string ToLoggableString()
+        {
+            string identifier;
+
+            if (String.IsNullOrWhiteSpace(Identifier))
+                identifier = Identifier;
+            else
+                identifier = Identifier.Length > 6
+                ? Identifier.Substring(0, 6) + "XXXXX"
+                : Identifier;
+
+            return $"Name '{FirstName} {LastName}', email: '{Email}', identifier: '{identifier}'";
         }
     }
 }

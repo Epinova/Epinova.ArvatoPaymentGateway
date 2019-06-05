@@ -86,16 +86,16 @@ namespace Epinova.ArvatoPaymentGateway
 
             if (responseMessage == null)
             {
-                _log.Error(new { message = "Authorize query failed. Service response was NULL or not OK", request = AnonymizeRequest(request) });
+                _log.Error(new { message = "Authorize query failed. Service response was NULL or not OK", request });
                 return null;
             }
 
             if (responseMessage.StatusCode != HttpStatusCode.OK)
             {
                 ResponseMessageDto[] errorList = await ParseJsonArray<ResponseMessageDto>(responseMessage);
-                _log.Warning(new { message = "Authorize query faild. ", request = AnonymizeRequest(request), responseMessage.StatusCode, errorList });
-                string errorCode;
-                string errorMessage = GetErrorMessage(errorList, out errorCode);
+                _log.Warning(new { message = "Authorize query faild. ", request, responseMessage.StatusCode, errorList });
+
+                string errorMessage = GetErrorMessage(errorList, out string errorCode);
                 return new AuthorizeResponse
                 {
                     HasError = true,
@@ -108,7 +108,7 @@ namespace Epinova.ArvatoPaymentGateway
 
             if (responseDto.HasError)
             {
-                _log.Error(new { message = "Authorize query failed", request = AnonymizeRequest(request), responseDto.ErrorMessage });
+                _log.Error(new { message = "Authorize query failed", request, responseDto.ErrorMessage });
                 return null;
             }
 
@@ -449,12 +449,6 @@ namespace Epinova.ArvatoPaymentGateway
         public bool IsUserError(string errorCode)
         {
             return !String.IsNullOrEmpty(errorCode) && (errorCode.StartsWith("200.", StringComparison.OrdinalIgnoreCase) || IsMissingSsnError(errorCode));
-        }
-
-        private static AuthorizeRequest AnonymizeRequest(AuthorizeRequest request)
-        {
-            request.Customer.Identifier = request.Customer.Identifier.Substring(0, 6) + "XXXXX";
-            return request;
         }
 
         private static HttpRequestMessage BuildRequest(string authorizationKey, string address, HttpMethod method, object idempotencyKey = null)
