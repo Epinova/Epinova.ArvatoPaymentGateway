@@ -16,6 +16,7 @@
     <dependencies>
       <dependency id="Automapper" version="8.1" />
       <dependency id="StructureMap" version="4.7" />
+      <dependency id="Epinova.Infrastructure" version="11.0" />
       <dependency id="EPiServer.Framework" version="[11.1, 12)" />
     </dependencies>
   </metadata>
