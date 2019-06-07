@@ -8,8 +8,9 @@ Epinova's take on Arvato's AfterPay payemnt gateway API
 
 ## Getting Started
 
-### Add registry to Structuremap
+### Add registry to IoC container
 
+if using Structuremap:
 ```
     container.Configure(
         x =>
@@ -24,9 +25,15 @@ Epinova's take on Arvato's AfterPay payemnt gateway API
         });
 ```
 
+If you cannot use the [structuremap registry](src/InvoiceGatewayRegistry.cs) provided with this module,
+you can manually set up [InvoiceGatewayService](src/InvoiceGatewayService.cs) for [IInvoiceGatewayService](src/IInvoiceGatewayService.cs)
+& [ICustomerLookupService](src/ICustomerLookupService.cs).
+
+
 ### Inject contract and use service
 
-Epinova.ArvatoPaymentGateway.IInvoiceGatewayService describes the service. 
+[Epinova.ArvatoPaymentGateway.IInvoiceGatewayService](src/IInvoiceGatewayService.cs) describes the main invoice gateway service.
+[Epinova.ArvatoPaymentGateway.ICustomerLookupService](src/ICustomerLookupService.cs) describes the customer lookup service.
 
 ### Prerequisites
 
