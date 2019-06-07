@@ -8,6 +8,24 @@ Epinova's take on Arvato's AfterPay payemnt gateway API
 
 ## Getting Started
 
+### Configuration
+
+No congiguration via config files are needed, but you can set up different API endpoint addresses for different environments via an appSetting.
+
+web.config:
+```
+<configuration>
+    <appSettings>
+	  <!-- Test environment: -->
+	  <add key="AfterPay.Api.BaseAddress" value="https://sandboxapi.horizonafs.com/eCommerceServicesWebApi/" />
+      <!-- Production environment: -->
+	  <add key="AfterPay.Api.BaseAddress" value="https://api.afterpay.io/" />
+	<appSettings>
+</configuration>
+```
+
+If not provided the production URL is used by default.
+
 ### Add registry to IoC container
 
 if using Structuremap:
