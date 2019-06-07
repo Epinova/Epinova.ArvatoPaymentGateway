@@ -16,7 +16,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Epinova.ArvatoPaymentGateway
 {
-    internal class InvoiceGatewayService : RestServiceBase, IInvoiceGatewayService, ICustomerLookupService
+    public class InvoiceGatewayService : RestServiceBase, IInvoiceGatewayService, ICustomerLookupService
     {
         internal static HttpClient Client = new HttpClient { BaseAddress = new Uri(ConfigurationManager.AppSettings["AfterPay.Api.BaseAddress"] ?? "https://api.afterpay.io/") };
         private readonly ILogger _log;
