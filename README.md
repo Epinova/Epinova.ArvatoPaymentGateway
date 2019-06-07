@@ -10,7 +10,7 @@ Epinova's take on Arvato's AfterPay payemnt gateway API
 
 ### Configuration
 
-No congiguration via config files are needed, but you can set up different API endpoint addresses for different environments via an appSetting.
+No configuration via config files are needed, but you can set up different API endpoint addresses for different environments via an appSetting.
 
 web.config:
 ```
