@@ -25,6 +25,70 @@ namespace Epinova.ArvatoPaymentGatewayTests
             _service = new InvoiceGatewayService(_logMock.Object, mapperConfiguration.CreateMapper());
         }
 
+
+        [Fact]
+        public async Task Authorize_ServiceFails_ReturnsNull()
+        {
+            _messageHandler.SendAsyncThrows(new Exception());
+            AuthorizeResponse result = await _service.AuthorizeAsync(Factory.GetString(), new AuthorizeRequest());
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task Authorize_ServiceReturnsNull_ReturnsNull()
+        {
+            _messageHandler.SendAsyncReturns(null);
+            AuthorizeResponse result = await _service.AuthorizeAsync(Factory.GetString(), new AuthorizeRequest());
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task Authorize_ServiceReturnsUnauthorizedStatus_ReturnsError()
+        {
+            _messageHandler.SendAsyncReturns(new HttpResponseMessage(HttpStatusCode.Unauthorized));
+            AuthorizeResponse result = await _service.AuthorizeAsync(Factory.GetString(), new AuthorizeRequest());
+
+            Assert.True(result.HasError);
+        }
+
+        [Fact]
+        public async Task Authorize_ServiceReturnsValidJson_ReturnsCorrectAuthStatus()
+        {
+            _messageHandler.SendAsyncReturns(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"Outcome\": \"Accepted\", \"ReservationId\": \"123456\", \"Customer\": {\"CustomerNumber\": \"789\"}}")
+            });
+            AuthorizeResponse result = await _service.AuthorizeAsync(Factory.GetString(), new AuthorizeRequest());
+
+            Assert.True(result.IsAuthorized);
+        }
+
+        [Fact]
+        public async Task Authorize_ServiceReturnsValidJson_ReturnsCorrectCustomerNumber()
+        {
+            _messageHandler.SendAsyncReturns(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"Outcome\": \"Accepted\", \"ReservationId\": \"123456\", \"Customer\": {\"CustomerNumber\": \"789\"}}")
+            });
+            AuthorizeResponse result = await _service.AuthorizeAsync(Factory.GetString(), new AuthorizeRequest());
+
+            Assert.Equal("789", result.CustomerNumber);
+        }
+
+        [Fact]
+        public async Task Authorize_ServiceReturnsValidJson_ReturnsCorrectReservationId()
+        {
+            _messageHandler.SendAsyncReturns(new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent("{\"Outcome\": \"Accepted\", \"ReservationId\": \"123456\", \"Customer\": {\"CustomerNumber\": \"789\"}}")
+            });
+            AuthorizeResponse result = await _service.AuthorizeAsync(Factory.GetString(), new AuthorizeRequest());
+
+            Assert.Equal("123456", result.ReservationId);
+        }
+
         [Fact]
         public async Task Cancel_ServiceReturnsValidJson_ReturnsResponseInstance()
         {
@@ -155,7 +219,6 @@ namespace Epinova.ArvatoPaymentGatewayTests
             Assert.Equal(new Version(versionString), result);
         }
 
-
         [Fact]
         public async Task IsApiUp_ServiceReturnsHttpStatusOK_ReturnsTrue()
         {
@@ -194,6 +257,48 @@ namespace Epinova.ArvatoPaymentGatewayTests
             bool result = await _service.IsApiUpAsync(transactionId);
 
             Assert.False(result);
+        }
+
+        [Fact]
+        public async Task Lookup_ServiceReturns404_LogWarning()
+        {
+            _messageHandler.SendAsyncReturns(new HttpResponseMessage(HttpStatusCode.NotFound)
+            {
+                Content = new StringContent("[ {\"Code\": \"Some error code\"} ]")
+            });
+            await _service.LookupAsync(Factory.GetString(), Factory.GetString());
+
+            _logMock.VerifyLog<string>(Level.Warning, Times.Once());
+        }
+
+        [Fact]
+        public async Task Lookup_ServiceReturns404_ReturnsNull()
+        {
+            _messageHandler.SendAsyncReturns(new HttpResponseMessage(HttpStatusCode.NotFound)
+            {
+                Content = new StringContent("[ {\"Code\": \"Some error code\"} ]")
+            });
+            CustomerLookupResponse result = await _service.LookupAsync(Factory.GetString(), Factory.GetString());
+
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async Task Lookup_ServiceReturnsNothing_LogError()
+        {
+            _messageHandler.SendAsyncReturns(null);
+            await _service.LookupAsync(Factory.GetString(), Factory.GetString());
+
+            _logMock.VerifyLog<string>(Level.Error, Times.Once());
+        }
+
+        [Fact]
+        public async Task Lookup_ServiceReturnsNothing_ReturnsNull()
+        {
+            _messageHandler.SendAsyncReturns(null);
+            CustomerLookupResponse result = await _service.LookupAsync(Factory.GetString(), Factory.GetString());
+
+            Assert.Null(result);
         }
 
         [Fact]
