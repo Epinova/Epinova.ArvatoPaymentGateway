@@ -13,7 +13,7 @@ Epinova's take on Arvato's AfterPay payemnt gateway API
 No configuration via config files are needed, but you can set up different API endpoint addresses for different environments via an appSetting.
 
 web.config:
-```
+```xml
 <configuration>
     <appSettings>
 	  <!-- Test environment: -->
@@ -29,7 +29,7 @@ If not provided the production URL is used by default.
 ### Add registry to IoC container
 
 if using Structuremap:
-```
+```csharp
     container.Configure(
         x =>
         {
@@ -63,7 +63,7 @@ you can manually set up [InvoiceGatewayService](src/InvoiceGatewayService.cs) fo
 
 The module is published on nuget.org.
 
-```
+```bat
 nuget install Epinova.ArvatoPaymentGateway
 ```
 
