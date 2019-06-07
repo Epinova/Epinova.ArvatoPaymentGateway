@@ -16,11 +16,11 @@ web.config:
 ```xml
 <configuration>
     <appSettings>
-	  <!-- Test environment: -->
-	  <add key="AfterPay.Api.BaseAddress" value="https://sandboxapi.horizonafs.com/eCommerceServicesWebApi/" />
+      <!-- Test environment: -->
+      <add key="AfterPay.Api.BaseAddress" value="https://sandboxapi.horizonafs.com/eCommerceServicesWebApi/" />
       <!-- Production environment: -->
-	  <add key="AfterPay.Api.BaseAddress" value="https://api.afterpay.io/" />
-	<appSettings>
+      <add key="AfterPay.Api.BaseAddress" value="https://api.afterpay.io/" />
+    <appSettings>
 </configuration>
 ```
 
@@ -30,17 +30,17 @@ If not provided the production URL is used by default.
 
 if using Structuremap:
 ```csharp
-    container.Configure(
-        x =>
+container.Configure(
+    x =>
+    {
+        x.Scan(y =>
         {
-            x.Scan(y =>
-            {
-                y.TheCallingAssembly();
-                y.WithDefaultConventions();
-            });
-
-            x.AddRegistry<Epinova.ArvatoPaymentGateway.InvoiceGatewayRegistry>();
+            y.TheCallingAssembly();
+            y.WithDefaultConventions();
         });
+
+        x.AddRegistry<Epinova.ArvatoPaymentGateway.InvoiceGatewayRegistry>();
+    });
 ```
 
 If you cannot use the [structuremap registry](src/InvoiceGatewayRegistry.cs) provided with this module,
