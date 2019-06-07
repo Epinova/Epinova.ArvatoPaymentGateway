@@ -16,7 +16,7 @@ using Newtonsoft.Json.Serialization;
 
 namespace Epinova.ArvatoPaymentGateway
 {
-    internal class InvoiceGatewayService : RestServiceBase, IInvoiceGatewayService, ICustomerLookupService
+    public class InvoiceGatewayService : RestServiceBase, IInvoiceGatewayService, ICustomerLookupService
     {
         internal static HttpClient Client = new HttpClient { BaseAddress = new Uri(ConfigurationManager.AppSettings["AfterPay.Api.BaseAddress"] ?? "https://api.afterpay.io/") };
         private readonly ILogger _log;
@@ -30,8 +30,6 @@ namespace Epinova.ArvatoPaymentGateway
         }
 
 
-        public override string ServiceName => nameof(InvoiceGatewayService);
-
         public async Task<CustomerLookupResponse> LookupAsync(string authorizationKey, string phoneNumber)
         {
             HttpRequestMessage requestMessage = BuildRequest(authorizationKey, "api/v3/lookup/customer", HttpMethod.Post);
@@ -41,7 +39,7 @@ namespace Epinova.ArvatoPaymentGateway
 
             requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage), true);
+            HttpResponseMessage responseMessage = await CallAsync(() => Client.SendAsync(requestMessage), true);
 
             if (responseMessage == null)
             {
@@ -51,12 +49,12 @@ namespace Epinova.ArvatoPaymentGateway
 
             if (responseMessage.StatusCode != HttpStatusCode.OK)
             {
-                ResponseMessageDto[] errorList = await ParseJsonArray<ResponseMessageDto>(responseMessage);
+                ResponseMessageDto[] errorList = await ParseJsonArrayAsync<ResponseMessageDto>(responseMessage);
                 _log.Warning(new { message = "Lookup query faild. ", phoneNumber, responseMessage.StatusCode, errorList });
                 return null;
             }
 
-            CustomerLookupResponseDto responseDto = await ParseJson<CustomerLookupResponseDto>(responseMessage);
+            CustomerLookupResponseDto responseDto = await ParseJsonAsync<CustomerLookupResponseDto>(responseMessage);
 
             if (responseDto.HasError)
             {
@@ -82,7 +80,7 @@ namespace Epinova.ArvatoPaymentGateway
 
             requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage), true);
+            HttpResponseMessage responseMessage = await CallAsync(() => Client.SendAsync(requestMessage), true);
 
             if (responseMessage == null)
             {
@@ -92,7 +90,7 @@ namespace Epinova.ArvatoPaymentGateway
 
             if (responseMessage.StatusCode != HttpStatusCode.OK)
             {
-                ResponseMessageDto[] errorList = await ParseJsonArray<ResponseMessageDto>(responseMessage);
+                ResponseMessageDto[] errorList = await ParseJsonArrayAsync<ResponseMessageDto>(responseMessage);
                 _log.Warning(new { message = "Authorize query faild. ", request, responseMessage.StatusCode, errorList });
 
                 string errorMessage = GetErrorMessage(errorList, out string errorCode);
@@ -104,7 +102,7 @@ namespace Epinova.ArvatoPaymentGateway
                 };
             }
 
-            AuthorizeResponseDto responseDto = await ParseJson<AuthorizeResponseDto>(responseMessage);
+            AuthorizeResponseDto responseDto = await ParseJsonAsync<AuthorizeResponseDto>(responseMessage);
 
             if (responseDto.HasError)
             {
@@ -128,7 +126,7 @@ namespace Epinova.ArvatoPaymentGateway
 
             requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage), true);
+            HttpResponseMessage responseMessage = await CallAsync(() => Client.SendAsync(requestMessage), true);
 
             if (responseMessage == null)
             {
@@ -138,7 +136,7 @@ namespace Epinova.ArvatoPaymentGateway
 
             if (responseMessage.StatusCode != HttpStatusCode.OK)
             {
-                ResponseMessageDto[] errorList = await ParseJsonArray<ResponseMessageDto>(responseMessage);
+                ResponseMessageDto[] errorList = await ParseJsonArrayAsync<ResponseMessageDto>(responseMessage);
                 _log.Warning(new { message = "AvailableInstallmentPlans query faild. ", request, responseMessage.StatusCode, errorList });
                 ResponseMessageDto firstError = errorList.FirstOrDefault();
                 return new AvailableInstallmentPlansResponse
@@ -149,7 +147,7 @@ namespace Epinova.ArvatoPaymentGateway
                 };
             }
 
-            AvailableInstallmentPlansResponseDto responseDto = await ParseJson<AvailableInstallmentPlansResponseDto>(responseMessage);
+            AvailableInstallmentPlansResponseDto responseDto = await ParseJsonAsync<AvailableInstallmentPlansResponseDto>(responseMessage);
 
             if (responseDto.HasError)
             {
@@ -174,7 +172,7 @@ namespace Epinova.ArvatoPaymentGateway
 
             //INFO: No POST data needed for voids. --tarjei
 
-            HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage), true);
+            HttpResponseMessage responseMessage = await CallAsync(() => Client.SendAsync(requestMessage), true);
 
             if (responseMessage == null)
             {
@@ -184,12 +182,12 @@ namespace Epinova.ArvatoPaymentGateway
 
             if (responseMessage.StatusCode != HttpStatusCode.OK)
             {
-                ResponseMessageDto[] errorList = await ParseJsonArray<ResponseMessageDto>(responseMessage);
+                ResponseMessageDto[] errorList = await ParseJsonArrayAsync<ResponseMessageDto>(responseMessage);
                 _log.Warning(new { message = "Cancel query faild.", orderNumber, responseMessage.StatusCode, errorList });
                 return null;
             }
 
-            CancelResponseDto responseDto = await ParseJson<CancelResponseDto>(responseMessage);
+            CancelResponseDto responseDto = await ParseJsonAsync<CancelResponseDto>(responseMessage);
 
             if (responseDto.HasError)
             {
@@ -213,7 +211,7 @@ namespace Epinova.ArvatoPaymentGateway
 
             requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage), true);
+            HttpResponseMessage responseMessage = await CallAsync(() => Client.SendAsync(requestMessage), true);
 
             if (responseMessage == null)
             {
@@ -223,12 +221,12 @@ namespace Epinova.ArvatoPaymentGateway
 
             if (responseMessage.StatusCode != HttpStatusCode.OK)
             {
-                ResponseMessageDto[] errorList = await ParseJsonArray<ResponseMessageDto>(responseMessage);
+                ResponseMessageDto[] errorList = await ParseJsonArrayAsync<ResponseMessageDto>(responseMessage);
                 _log.Warning(new { message = "Capture query faild.", request.OrderNumber, responseMessage.StatusCode, errorList });
                 return null;
             }
 
-            CaptureResponseDto responseDto = await ParseJson<CaptureResponseDto>(responseMessage);
+            CaptureResponseDto responseDto = await ParseJsonAsync<CaptureResponseDto>(responseMessage);
 
             if (responseDto.HasError)
             {
@@ -249,7 +247,7 @@ namespace Epinova.ArvatoPaymentGateway
 
             //INFO: No POST data needed for full captures. --tarjei
 
-            HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage), true);
+            HttpResponseMessage responseMessage = await CallAsync(() => Client.SendAsync(requestMessage), true);
 
             if (responseMessage == null)
             {
@@ -259,12 +257,12 @@ namespace Epinova.ArvatoPaymentGateway
 
             if (responseMessage.StatusCode != HttpStatusCode.OK)
             {
-                ResponseMessageDto[] errorList = await ParseJsonArray<ResponseMessageDto>(responseMessage);
+                ResponseMessageDto[] errorList = await ParseJsonArrayAsync<ResponseMessageDto>(responseMessage);
                 _log.Warning(new { message = "Full capture query faild.", orderNumber, responseMessage.StatusCode, errorList });
                 return null;
             }
 
-            CaptureResponseDto responseDto = await ParseJson<CaptureResponseDto>(responseMessage);
+            CaptureResponseDto responseDto = await ParseJsonAsync<CaptureResponseDto>(responseMessage);
 
             if (responseDto.HasError)
             {
@@ -289,7 +287,7 @@ namespace Epinova.ArvatoPaymentGateway
 
             requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage), true);
+            HttpResponseMessage responseMessage = await CallAsync(() => Client.SendAsync(requestMessage), true);
 
             if (responseMessage == null)
             {
@@ -299,12 +297,12 @@ namespace Epinova.ArvatoPaymentGateway
 
             if (responseMessage.StatusCode != HttpStatusCode.OK)
             {
-                ResponseMessageDto[] errorList = await ParseJsonArray<ResponseMessageDto>(responseMessage);
+                ResponseMessageDto[] errorList = await ParseJsonArrayAsync<ResponseMessageDto>(responseMessage);
                 _log.Warning(new { message = "Credit query faild.", request, responseMessage.StatusCode, errorList });
                 return null;
             }
 
-            RefundOrderResponseDto responseDto = await ParseJson<RefundOrderResponseDto>(responseMessage);
+            RefundOrderResponseDto responseDto = await ParseJsonAsync<RefundOrderResponseDto>(responseMessage);
 
             if (responseDto.HasError)
             {
@@ -325,7 +323,7 @@ namespace Epinova.ArvatoPaymentGateway
 
             //INFO: No POST data needed for full refunds. --tarjei
 
-            HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage), true);
+            HttpResponseMessage responseMessage = await CallAsync(() => Client.SendAsync(requestMessage), true);
 
             if (responseMessage == null)
             {
@@ -335,12 +333,12 @@ namespace Epinova.ArvatoPaymentGateway
 
             if (responseMessage.StatusCode != HttpStatusCode.OK)
             {
-                ResponseMessageDto[] errorList = await ParseJsonArray<ResponseMessageDto>(responseMessage);
+                ResponseMessageDto[] errorList = await ParseJsonArrayAsync<ResponseMessageDto>(responseMessage);
                 _log.Warning(new { message = "Full credit query faild.", orderNumber, responseMessage.StatusCode, errorList });
                 return null;
             }
 
-            RefundOrderResponseDto responseDto = await ParseJson<RefundOrderResponseDto>(responseMessage);
+            RefundOrderResponseDto responseDto = await ParseJsonAsync<RefundOrderResponseDto>(responseMessage);
 
             if (responseDto.HasError)
             {
@@ -359,7 +357,7 @@ namespace Epinova.ArvatoPaymentGateway
         {
             HttpRequestMessage requestMessage = BuildRequest(authorizationKey, $"api/v3/orders/{orderNumber}", HttpMethod.Get);
 
-            HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage), true);
+            HttpResponseMessage responseMessage = await CallAsync(() => Client.SendAsync(requestMessage), true);
 
             if (responseMessage == null)
             {
@@ -369,12 +367,12 @@ namespace Epinova.ArvatoPaymentGateway
 
             if (responseMessage.StatusCode != HttpStatusCode.OK)
             {
-                ResponseMessageDto[] errorList = await ParseJsonArray<ResponseMessageDto>(responseMessage);
+                ResponseMessageDto[] errorList = await ParseJsonArrayAsync<ResponseMessageDto>(responseMessage);
                 _log.Warning(new { message = "Get order query faild.", orderNumber, responseMessage.StatusCode, errorList });
                 return null;
             }
 
-            OrderResponseDto responseDto = await ParseJson<OrderResponseDto>(responseMessage);
+            OrderResponseDto responseDto = await ParseJsonAsync<OrderResponseDto>(responseMessage);
 
             if (responseDto.HasError)
             {
@@ -392,14 +390,14 @@ namespace Epinova.ArvatoPaymentGateway
         public async Task<Version> GetVersionAsync(string authorizationKey)
         {
             HttpRequestMessage requestMessage = BuildRequest(authorizationKey, "api/v3/version", HttpMethod.Get);
-            HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage));
+            HttpResponseMessage responseMessage = await CallAsync(() => Client.SendAsync(requestMessage));
             if (responseMessage == null)
             {
                 _log.Error("Version query failed. Service response was NULL");
                 return null;
             }
 
-            VersionInfoDto dto = await ParseJson<VersionInfoDto>(responseMessage);
+            VersionInfoDto dto = await ParseJsonAsync<VersionInfoDto>(responseMessage);
 
             if (dto.HasError)
             {
@@ -430,7 +428,7 @@ namespace Epinova.ArvatoPaymentGateway
         public async Task<bool> IsApiUpAsync(string authorizationKey)
         {
             HttpRequestMessage requestMessage = BuildRequest(authorizationKey, "api/v3/status", HttpMethod.Get);
-            HttpResponseMessage responseMessage = await Call(() => Client.SendAsync(requestMessage));
+            HttpResponseMessage responseMessage = await CallAsync(() => Client.SendAsync(requestMessage));
 
             if (responseMessage == null)
             {
