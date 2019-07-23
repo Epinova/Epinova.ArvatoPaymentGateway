@@ -28,7 +28,7 @@ If not provided the production URL is used by default.
 
 ### Add registry to IoC container
 
-if using Structuremap:
+If using Structuremap:
 ```csharp
 container.Configure(
     x =>
@@ -46,7 +46,6 @@ container.Configure(
 If you cannot use the [structuremap registry](src/InvoiceGatewayRegistry.cs) provided with this module,
 you can manually set up [InvoiceGatewayService](src/InvoiceGatewayService.cs) for [IInvoiceGatewayService](src/IInvoiceGatewayService.cs)
 & [ICustomerLookupService](src/ICustomerLookupService.cs).
-
 
 ### Inject contract and use service
 
