@@ -326,5 +326,4 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/ExcludedCategoriesList/@EntryValue">Integration, Manual</s:String>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Arvato/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Epinova/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/UserDictionary/Words/=Geocoding/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/UserDictionary/Words/=Idempotency/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
