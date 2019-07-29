@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.572
+VisualStudioVersion = 15.0.28307.757
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epinova.ArvatoPaymentGateway", "src\Epinova.ArvatoPaymentGateway.csproj", "{ECF74B4F-444A-4B4F-993B-B3A389DFCD1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epinova.ArvatoPaymentGateway", "src\Epinova.ArvatoPaymentGateway.csproj", "{ECF74B4F-444A-4B4F-993B-B3A389DFCD1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Epinova.ArvatoPaymentGatewayTests", "tests\Epinova.ArvatoPaymentGatewayTests.csproj", "{AAEAC5F2-1FC1-42C1-9A83-FEBA3EAB1E0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Epinova.ArvatoPaymentGatewayTests", "tests\Epinova.ArvatoPaymentGatewayTests.csproj", "{AAEAC5F2-1FC1-42C1-9A83-FEBA3EAB1E0C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{7178DA35-BAF6-4920-8F4D-5B26BE9D46F1}"
 	ProjectSection(SolutionItems) = preProject

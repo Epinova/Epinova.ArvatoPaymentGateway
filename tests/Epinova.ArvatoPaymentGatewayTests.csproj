@@ -1,169 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\xunit.core.2.4.1\build\xunit.core.props" Condition="Exists('..\packages\xunit.core.2.4.1\build\xunit.core.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{AAEAC5F2-1FC1-42C1-9A83-FEBA3EAB1E0C}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Epinova.ArvatoPaymentGatewayTests</RootNamespace>
-    <AssemblyName>Epinova.ArvatoPaymentGatewayTests</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <TestProjectType>UnitTest</TestProjectType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=8.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.8.1.0\lib\net461\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Epinova.Infrastructure, Version=11.0.0.43, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Epinova.Infrastructure.11.0.0.43\lib\net462\Epinova.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.ApplicationModules, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.ApplicationModules.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.Data, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.Data.Cache, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.Data.Cache.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.Events, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.Events.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.Framework, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.Licensing, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.Licensing.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq, Version=4.10.0.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.10.1\lib\net45\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StructureMap.4.7.0\lib\net45\StructureMap.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Data.SqlClient, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SqlClient.4.4.0\lib\net461\System.Data.SqlClient.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security" />
-    <Reference Include="System.Security.AccessControl, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.AccessControl.4.4.0\lib\net461\System.Security.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Xml, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Xml.4.4.2\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Permissions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Permissions.4.4.0\lib\net461\System.Security.Permissions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Principal.Windows, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Principal.Windows.4.4.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.AccessControl, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.AccessControl.4.4.0\lib\net461\System.Threading.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.abstractions.2.0.3\lib\net35\xunit.abstractions.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.assert, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.assert.2.4.1\lib\netstandard1.1\xunit.assert.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.core, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.core.2.4.1\lib\net452\xunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.execution.desktop, Version=2.4.1.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <HintPath>..\packages\xunit.extensibility.execution.2.4.1\lib\net452\xunit.execution.desktop.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Moq" Version="4.12.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="AccountProductTests.cs" />
-    <Compile Include="AuthorizeCustomerTests.cs" />
-    <Compile Include="AuthorizeRequestTests.cs" />
-    <Compile Include="CaptureRequestTests.cs" />
-    <Compile Include="IdempotentExtensionsTests.cs" />
-    <Compile Include="InstallmentTests.cs" />
-    <Compile Include="LoggerMockExtensions.cs" />
-    <Compile Include="OrderItemTests.cs" />
-    <Compile Include="OrderSummaryTests.cs" />
-    <Compile Include="PaymentTests.cs" />
-    <Compile Include="ResponseDtoBaseTests.cs" />
-    <Compile Include="CreditRequestTests.cs" />
-    <Compile Include="Factory.cs" />
-    <Compile Include="InvoiceGatewayMappingProfileTests.cs" />
-    <Compile Include="InvoiceGatewayRegistryTests.cs" />
-    <Compile Include="InvoiceGatewayServiceTests.cs" />
-    <Compile Include="InvoiceGatewayServiceTests.Data.cs" />
-    <Compile Include="OrderInfoTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RefundOrderItemDtoTests.cs" />
-    <Compile Include="TestableHttpMessageHandler.cs" />
-    <Compile Include="TestableRegistry.cs" />
+    <ProjectReference Include="..\src\Epinova.ArvatoPaymentGateway.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\src\Epinova.ArvatoPaymentGateway.csproj">
-      <Project>{ecf74b4f-444a-4b4f-993b-b3a389dfcd1a}</Project>
-      <Name>Epinova.ArvatoPaymentGateway</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\xunit.core.2.4.1\build\xunit.core.targets" Condition="Exists('..\packages\xunit.core.2.4.1\build\xunit.core.targets')" />
+
 </Project>

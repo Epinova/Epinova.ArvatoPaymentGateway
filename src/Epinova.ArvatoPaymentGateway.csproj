@@ -1,206 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ECF74B4F-444A-4B4F-993B-B3A389DFCD1A}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Epinova.ArvatoPaymentGateway</RootNamespace>
-    <AssemblyName>Epinova.ArvatoPaymentGateway</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>11.2.0</Version>
+    <Authors>Tarjei Olsen</Authors>
+    <Company>Epinova AS</Company>
+    <Description>Epinova's take on Arvato's AfterPay payemnt gateway API wrapper</Description>
+    <Copyright>Copyright 2019 - Epinova AS</Copyright>
+    <PackageProjectUrl>https://github.com/Epinova/Epinova.ArvatoPaymentGateway</PackageProjectUrl>
+    <PackageIconUrl>http://www.epinova.no/favicon.ico</PackageIconUrl>
+    <RepositoryUrl>https://github.com/Epinova/Epinova.ArvatoPaymentGateway</RepositoryUrl>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=8.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.8.1.0\lib\net461\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="Epinova.Infrastructure, Version=11.0.0.43, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Epinova.Infrastructure.11.0.0.43\lib\net462\Epinova.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.ApplicationModules, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.ApplicationModules.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.Data, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.Data.Cache, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.Data.Cache.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.Events, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.Events.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.Framework, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.Framework.dll</HintPath>
-    </Reference>
-    <Reference Include="EPiServer.Licensing, Version=11.1.0.0, Culture=neutral, PublicKeyToken=8fe83dea738b45b7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPiServer.Framework.11.1.0\lib\net461\EPiServer.Licensing.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="StructureMap, Version=4.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\StructureMap.4.7.0\lib\net45\StructureMap.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Data.SqlClient, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SqlClient.4.4.0\lib\net461\System.Data.SqlClient.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Security.AccessControl, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.AccessControl.4.4.0\lib\net461\System.Security.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Cryptography.Xml, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Cryptography.Xml.4.4.2\lib\net461\System.Security.Cryptography.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Permissions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Permissions.4.4.0\lib\net461\System.Security.Permissions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security.Principal.Windows, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Principal.Windows.4.4.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.AccessControl, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.AccessControl.4.4.0\lib\net461\System.Threading.AccessControl.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="AutoMapper" version="8.1.0" />
+    <PackageReference Include="Epinova.Infrastructure" version="[11.1.0.90,)" />
+    <PackageReference Include="EPiServer.Framework" Version="[11.1.0, 12.0.0)" />
+    <PackageReference Include="StructureMap" version="4.7.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AccountProduct.cs" />
-    <Compile Include="AccountProductDto.cs" />
-    <Compile Include="Address.cs" />
-    <Compile Include="AddressDto.cs" />
-    <Compile Include="AuthorizeCustomer.cs" />
-    <Compile Include="AuthorizeRequest.cs" />
-    <Compile Include="AuthorizeRequestDto.cs" />
-    <Compile Include="AuthorizeResponse.cs" />
-    <Compile Include="AuthorizeResponseDto.cs" />
-    <Compile Include="AvailableInstallmentPlansRequest.cs" />
-    <Compile Include="AvailableInstallmentPlansRequestDto.cs" />
-    <Compile Include="AvailableInstallmentPlansResponse.cs" />
-    <Compile Include="AvailableInstallmentPlansResponseDto.cs" />
-    <Compile Include="Base\BaseArvatoResponse.cs" />
-    <Compile Include="Base\BaseOrder.cs" />
-    <Compile Include="Base\BaseOrderDto.cs" />
-    <Compile Include="Base\BaseOrderItemDto.cs" />
-    <Compile Include="CampaignInfoDto.cs" />
-    <Compile Include="Cancellation.cs" />
-    <Compile Include="CancellationDto.cs" />
-    <Compile Include="CancellationItemDto.cs" />
-    <Compile Include="CancelResponse.cs" />
-    <Compile Include="CancelResponseDto.cs" />
-    <Compile Include="Capture.cs" />
-    <Compile Include="CaptureDto.cs" />
-    <Compile Include="CaptureItemDto.cs" />
-    <Compile Include="CaptureRequest.cs" />
-    <Compile Include="CaptureRequestDto.cs" />
-    <Compile Include="CaptureResponse.cs" />
-    <Compile Include="CaptureResponseDto.cs" />
-    <Compile Include="CheckoutCustomer.cs" />
-    <Compile Include="CheckoutCustomerDto.cs" />
-    <Compile Include="ConversationLanguageDto.cs" />
-    <Compile Include="CountryCodeDto.cs" />
-    <Compile Include="CreditRequest.cs" />
-    <Compile Include="CreditResponse.cs" />
-    <Compile Include="CurrencyDto.cs" />
-    <Compile Include="CustomerCategoryDto.cs" />
-    <Compile Include="CustomerDtoBase.cs" />
-    <Compile Include="CustomerLookupResponse.cs" />
-    <Compile Include="CustomerLookupResponseDto.cs" />
-    <Compile Include="CustomerRequestDto.cs" />
-    <Compile Include="CustomerResponseDto.cs" />
-    <Compile Include="CustomerRiskDto.cs" />
-    <Compile Include="ErrorAction.cs" />
-    <Compile Include="ErrorCode.cs" />
-    <Compile Include="IdempotentExtensions.cs" />
-    <Compile Include="IIdempotent.cs" />
-    <Compile Include="ICustomerLookupService.cs" />
-    <Compile Include="IInvoiceGatewayService.cs" />
-    <Compile Include="Installment.cs" />
-    <Compile Include="InstallmentDto.cs" />
-    <Compile Include="InstallmentInfo.cs" />
-    <Compile Include="InstallmentInfoDto.cs" />
-    <Compile Include="InvoiceGatewayMappingProfile.cs" />
-    <Compile Include="InvoiceGatewayRegistry.cs" />
-    <Compile Include="InvoiceGatewayService.cs" />
-    <Compile Include="OrderChannelTypeDto.cs" />
-    <Compile Include="OrderDeliveryTypeDto.cs" />
-    <Compile Include="OrderDetails.cs" />
-    <Compile Include="OrderInfo.cs" />
-    <Compile Include="OrderInfoDto.cs" />
-    <Compile Include="OrderItem.cs" />
-    <Compile Include="OrderItemDto.cs" />
-    <Compile Include="OrderItemExtendedDto.cs" />
-    <Compile Include="OrderResponse.cs" />
-    <Compile Include="OrderResponseDto.cs" />
-    <Compile Include="OrderSummary.cs" />
-    <Compile Include="OrderSummaryDto.cs" />
-    <Compile Include="OutcomeTypeDto.cs" />
-    <Compile Include="Payment.cs" />
-    <Compile Include="PaymentDto.cs" />
-    <Compile Include="PaymentType.cs" />
-    <Compile Include="PaymentTypeDto.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Refund.cs" />
-    <Compile Include="RefundDto.cs" />
-    <Compile Include="RefundItemDto.cs" />
-    <Compile Include="RefundOrderItemDto.cs" />
-    <Compile Include="RefundOrderRequestDto.cs" />
-    <Compile Include="RefundOrderResponseDto.cs" />
-    <Compile Include="RefundTypeDto.cs" />
-    <Compile Include="ResponseDtoBase.cs" />
-    <Compile Include="ResponseMessage.cs" />
-    <Compile Include="ResponseMessageAction.cs" />
-    <Compile Include="ResponseMessageActionDto.cs" />
-    <Compile Include="ResponseMessageDto.cs" />
-    <Compile Include="ResponseMessageType.cs" />
-    <Compile Include="ResponseMessageTypeDto.cs" />
-    <Compile Include="ResponseOrderDto.cs" />
-    <Compile Include="ShippingDetailsDto.cs" />
-    <Compile Include="ShippingDetailsWithNumberDto.cs" />
-    <Compile Include="UserProfileDto.cs" />
-    <Compile Include="VatCategoryDto.cs" />
-    <Compile Include="VersionInfoDto.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Epinova.ArvatoPaymentGateway.nuspec" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>
