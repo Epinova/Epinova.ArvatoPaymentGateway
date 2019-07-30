@@ -32,6 +32,9 @@ namespace Epinova.ArvatoPaymentGateway
 
         public async Task<CustomerLookupResponse> LookupAsync(string authorizationKey, string phoneNumber)
         {
+            if (String.IsNullOrWhiteSpace(phoneNumber))
+                return null;
+
             HttpRequestMessage requestMessage = BuildRequest(authorizationKey, "api/v3/lookup/customer", HttpMethod.Post);
             var requestDto = new { MobilePhone = phoneNumber };
 

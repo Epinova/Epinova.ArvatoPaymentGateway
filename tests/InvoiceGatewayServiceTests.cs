@@ -259,6 +259,28 @@ namespace Epinova.ArvatoPaymentGatewayTests
             Assert.False(result);
         }
 
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public async Task Lookup_PhoneNumberIsNullOrEmptyOrWhite_DoesNotCallApi(string phoneNumber)
+        {
+            CustomerLookupResponse result = await _service.LookupAsync(Factory.GetString(), phoneNumber);
+
+            Assert.Equal(0, _messageHandler.CallCount());
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public async Task Lookup_PhoneNumberIsNullOrEmptyOrWhite_ReturnsNull(string phoneNumber)
+        {
+            CustomerLookupResponse result = await _service.LookupAsync(Factory.GetString(), phoneNumber);
+
+            Assert.Null(result);
+        }
+
         [Fact]
         public async Task Lookup_ServiceReturns404_LogWarning()
         {
