@@ -267,21 +267,21 @@ namespace Epinova.ArvatoPaymentGatewayTests
         }
 
         [Fact]
-        public void Map_OrderItemDto_CorrectGrossUnitPrice()
+        public void Map_OrderItem_CorrectGrossUnitPrice()
         {
-            var src = new OrderItem { GrossUnitPrice = Factory.GetInteger() };
+            var src = new OrderItemExtendedDto { GrossUnitPrice = Factory.GetInteger() };
 
-            var dest = _mapper.Map<OrderItemDto>(src);
+            var dest = _mapper.Map<OrderItem>(src);
 
             Assert.Equal(dest.GrossUnitPrice, src.GrossUnitPrice);
         }
 
         [Fact]
-        public void Map_OrderItemExtendedDto_CorrectGrossUnitPrice()
+        public void Map_OrderItemDto_CorrectGrossUnitPrice()
         {
             var src = new OrderItem { GrossUnitPrice = Factory.GetInteger() };
 
-            var dest = _mapper.Map<OrderItemExtendedDto>(src);
+            var dest = _mapper.Map<OrderItemDto>(src);
 
             Assert.Equal(dest.GrossUnitPrice, src.GrossUnitPrice);
         }
