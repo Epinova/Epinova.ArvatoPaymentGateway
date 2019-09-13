@@ -52,6 +52,7 @@ namespace Epinova.ArvatoPaymentGateway
             CreateMap<UserProfileDto, CustomerLookupResponse>(MemberList.None)
                 .ConstructUsing(src => addressConverter(src.AddressList));
 
+            CreateMap<OrderItemExtendedDto, OrderItem>();
             CreateMap<OrderResponseDto, OrderResponse>();
             CreateMap<ResponseOrderDto, OrderDetails>();
             CreateMap<CaptureDto, Capture>();
