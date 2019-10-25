@@ -1,6 +1,5 @@
 ﻿using Epinova.ArvatoPaymentGateway.Base;
 
-
 namespace Epinova.ArvatoPaymentGateway
 {
     public class AvailableInstallmentPlansResponse : BaseArvatoResponse

@@ -15,6 +15,20 @@ namespace Epinova.ArvatoPaymentGateway
         public string PostalCode { get; set; }
         public string PostalPlace { get; set; }
 
+        public string ToLoggableString()
+        {
+            string identifier;
+
+            if (String.IsNullOrWhiteSpace(Identifier))
+                identifier = Identifier;
+            else
+                identifier = Identifier.Length > 6
+                    ? Identifier.Substring(0, 6) + "XXXXX"
+                    : Identifier;
+
+            return $"Name '{FirstName} {LastName}', email: '{Email}', identifier: '{identifier}'";
+        }
+
         public int GetIdempotentKey()
         {
             unchecked
@@ -30,20 +44,6 @@ namespace Epinova.ArvatoPaymentGateway
                 hashCode = (hashCode * 397) ^ (PostalPlace?.GetHashCode() ?? 0);
                 return hashCode;
             }
-        }
-
-        public string ToLoggableString()
-        {
-            string identifier;
-
-            if (String.IsNullOrWhiteSpace(Identifier))
-                identifier = Identifier;
-            else
-                identifier = Identifier.Length > 6
-                ? Identifier.Substring(0, 6) + "XXXXX"
-                : Identifier;
-
-            return $"Name '{FirstName} {LastName}', email: '{Email}', identifier: '{identifier}'";
         }
     }
 }

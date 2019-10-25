@@ -18,7 +18,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
         [Fact]
         public void GetIdempotentListKey_InstanceHasNullEntriesOnly_ReturnsZero()
         {
-            IEnumerable<IIdempotent> instance = Enumerable.Range(1, 10).Select(i => (IIdempotent) null);
+            IEnumerable<IIdempotent> instance = Enumerable.Range(1, 10).Select(i => (IIdempotent)null);
 
             Assert.Equal(0, instance.GetIdempotentListKey());
         }
@@ -27,7 +27,7 @@ namespace Epinova.ArvatoPaymentGatewayTests
         public void GetIdempotentListKey_InstanceHasSomeNullItems_ReturnsItemsHashCodeIgnoringNulls()
         {
             IEnumerable<IIdempotent> instance1 = Enumerable.Range(1, 10).Select(i => new TestableIdempotentModel(i));
-            IEnumerable<IIdempotent> instance2 = Enumerable.Range(1, 10).Select(i => new TestableIdempotentModel(i)).Concat(Enumerable.Range(1, 10).Select(i => (IIdempotent) null));
+            IEnumerable<IIdempotent> instance2 = Enumerable.Range(1, 10).Select(i => new TestableIdempotentModel(i)).Concat(Enumerable.Range(1, 10).Select(i => (IIdempotent)null));
 
             Assert.Equal(instance1.GetIdempotentListKey(), instance2.GetIdempotentListKey());
         }
@@ -48,8 +48,6 @@ namespace Epinova.ArvatoPaymentGatewayTests
             Assert.Equal(0, instance.GetIdempotentListKey());
         }
 
-        #region Nested type: TestableIdempotentModel
-
         private class TestableIdempotentModel : IIdempotent
         {
             public TestableIdempotentModel(int key)
@@ -64,7 +62,5 @@ namespace Epinova.ArvatoPaymentGatewayTests
                 return Key;
             }
         }
-
-        #endregion
     }
 }

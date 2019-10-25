@@ -1,18 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using AutoMapper;
-using EPiServer.Logging;
-using Moq;
-using Xunit;
-
-namespace Epinova.ArvatoPaymentGatewayTests
+﻿namespace Epinova.ArvatoPaymentGatewayTests
 {
     public partial class InvoiceGatewayServiceTests
     {
-
         private string GetOrderData()
         {
             return @"
