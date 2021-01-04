@@ -20,9 +20,11 @@ namespace Epinova.ArvatoPaymentGateway
                 .ForMember(dest => dest.CustomerNumber, opt => opt.MapFrom(src => src.Customer.CustomerNumber))
                 .ForMember(dest => dest.AddressList, opt => opt.MapFrom(src => src.Customer.AddressList))
                 .ForMember(dest => dest.IsAuthorized, opt => opt.MapFrom(src => src.Outcome == OutcomeTypeDto.Accepted))
+                .ForMember(dest => dest.IsPending, opt => opt.MapFrom(src => src.Outcome == OutcomeTypeDto.Pending))
                 .ForMember(dest => dest.HasError, opt => opt.Ignore())
                 .ForMember(dest => dest.ErrorCode, opt => opt.Ignore())
-                .ForMember(dest => dest.ErrorMessage, opt => opt.Ignore());
+                .ForMember(dest => dest.ErrorMessage, opt => opt.Ignore())
+                .ForMember(dest => dest.SecureLoginUrl, opt => opt.MapFrom(src => src.SecureLoginUrl));
 
             CreateMap<AddressDto, Address>();
 
