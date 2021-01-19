@@ -1,4 +1,4 @@
-namespace Epinova.ArvatoPaymentGateway
+﻿namespace Epinova.ArvatoPaymentGateway
 {
     internal enum ResponseMessageActionDto
     {
@@ -6,6 +6,7 @@ namespace Epinova.ArvatoPaymentGateway
         AskConsumerToConfirm,
         AskConsumerToReEnterData,
         OfferSecurePaymentMethods,
-        RequiresSsn
+        RequiresSsn,
+        AskConsumerToIdentify
     }
 }
