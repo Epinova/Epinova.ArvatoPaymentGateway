@@ -33,7 +33,7 @@ build:
   publish_nuget: true
   verbosity: minimal
 test_script:
-- cmd: IF DEFINED sonarcloudkey (OpenCover.Console.exe -register:user -target:dotnet.exe -targetargs:"test --no-build -c %configuration% -l \"trx;LogFileName=%APPVEYOR_BUILD_FOLDER%\test.results.xml\" --filter %testFilter%" -output:%APPVEYOR_BUILD_FOLDER%\opencover.results.xml -coverbytest:*Tests.dll -oldStyle) ELSE (dotnet test --no-build -c %configuration% --filter "%testFilter%")
+- cmd: 'dotcover cover /TargetExecutable=%xunit20%\xunit.console.exe /TargetArguments="%APPVEYOR_BUILD_FOLDER%\tests\bin\Epinova.ArvatoPaymentGatewayTests.dll -noshadow -xml %APPVEYOR_BUILD_FOLDER%\xunit.xml" /Output="%APPVEYOR_BUILD_FOLDER%\dotcover.html" /ReportType="HTML"'
 cache:
   - '%USERPROFILE%\.nuget\packages'
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
