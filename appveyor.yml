@@ -33,7 +33,7 @@ build:
   publish_nuget: true
   verbosity: minimal
 test_script:
-- cmd: 'dotcover cover /TargetExecutable=%xunit20%\xunit.console.exe /TargetArguments="%APPVEYOR_BUILD_FOLDER%\tests\bin\Epinova.ArvatoPaymentGatewayTests.dll -noshadow -xml %APPVEYOR_BUILD_FOLDER%\xunit.xml" /Output="%APPVEYOR_BUILD_FOLDER%\dotcover.html" /ReportType="HTML"'
+- cmd: 'dotcover cover /TargetExecutable=%xunit20%\xunit.console.exe /TargetArguments="%APPVEYOR_BUILD_FOLDER%\tests\bin\Release\netcoreapp2.1\Epinova.ArvatoPaymentGatewayTests.dll -noshadow -xml %APPVEYOR_BUILD_FOLDER%\xunit.xml" /Output="%APPVEYOR_BUILD_FOLDER%\dotcover.html" /ReportType="HTML"'
 cache:
   - '%USERPROFILE%\.nuget\packages'
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
