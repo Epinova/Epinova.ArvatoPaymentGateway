@@ -13,6 +13,7 @@ namespace Epinova.ArvatoPaymentGateway
         public Guid OrderId { get; set; }
         public OrderItemExtendedDto[] OrderItems { get; set; }
         public string OrderNumber { get; set; }
+        public OrderStatusDto Status { get; set; }
         public decimal TotalGrossAmount { get; set; }
         public decimal TotalNetAmount { get; set; }
         public DateTime UpdatedAt { get; set; }
