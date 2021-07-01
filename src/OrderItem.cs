@@ -5,6 +5,7 @@
         public string Description { get; set; }
         public decimal DiscountAmount { get; set; }
         public decimal GrossUnitPrice { get; set; }
+        public string ImageUrl { get; set; }
         public int LineNumber { get; set; }
         public decimal NetUnitPrice { get; set; }
         public string ProductId { get; set; }
@@ -19,6 +20,7 @@
                 int hashCode = Description?.GetHashCode() ?? 0;
                 hashCode = (hashCode * 397) ^ DiscountAmount.GetHashCode();
                 hashCode = (hashCode * 397) ^ GrossUnitPrice.GetHashCode();
+                hashCode = (hashCode * 397) ^ (ImageUrl?.GetHashCode() ?? 0);
                 hashCode = (hashCode * 397) ^ LineNumber;
                 hashCode = (hashCode * 397) ^ NetUnitPrice.GetHashCode();
                 hashCode = (hashCode * 397) ^ (ProductId?.GetHashCode() ?? 0);
