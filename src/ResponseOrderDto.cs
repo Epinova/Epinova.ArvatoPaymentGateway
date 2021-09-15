@@ -8,7 +8,6 @@ namespace Epinova.ArvatoPaymentGateway
         public CheckoutCustomerDto Customer { get; set; }
         public bool HasSeparateDeliveryAddress { get; set; }
         public DateTime InsertedAt { get; set; }
-        public string MerchantImageUrl { get; set; }
         public OrderChannelTypeDto OrderChannelType { get; set; }
         public OrderDeliveryTypeDto OrderDeliveryType { get; set; }
         public Guid OrderId { get; set; }
