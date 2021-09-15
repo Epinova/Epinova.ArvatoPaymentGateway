@@ -4,6 +4,7 @@ namespace Epinova.ArvatoPaymentGateway
 {
     public class OrderDetails
     {
+        public string MerchantImageUrl { get; set; }
         public Guid OrderId { get; set; }
         public OrderItem[] OrderItems { get; set; }
         public string OrderNumber { get; set; }
