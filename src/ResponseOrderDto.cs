@@ -17,6 +17,5 @@ namespace Epinova.ArvatoPaymentGateway
         public decimal TotalGrossAmount { get; set; }
         public decimal TotalNetAmount { get; set; }
         public DateTime UpdatedAt { get; set; }
-
     }
 }
